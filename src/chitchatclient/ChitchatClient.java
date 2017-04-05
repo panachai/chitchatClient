@@ -84,7 +84,7 @@ public class ChitchatClient extends javax.swing.JFrame {
         tfMessage = new javax.swing.JTextField();
         btSend = new javax.swing.JButton();
         btClear = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btDisconnect = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,6 +93,15 @@ public class ChitchatClient extends javax.swing.JFrame {
         jLabel2.setText("Port");
 
         jLabel3.setText("Name");
+
+        tfIp.setText("localhost");
+
+        tfPort.setText("8888");
+        tfPort.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tfPortActionPerformed(evt);
+            }
+        });
 
         btConnect.setText("Connect");
         btConnect.addActionListener(new java.awt.event.ActionListener() {
@@ -134,10 +143,10 @@ public class ChitchatClient extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Disconnect");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btDisconnect.setText("Disconnect");
+        btDisconnect.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btDisconnectActionPerformed(evt);
             }
         });
 
@@ -157,7 +166,7 @@ public class ChitchatClient extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btConnect)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jButton1)
+                                        .addComponent(btDisconnect)
                                         .addGap(0, 0, Short.MAX_VALUE))
                                     .addComponent(tfName)))
                             .addGroup(layout.createSequentialGroup()
@@ -202,7 +211,7 @@ public class ChitchatClient extends javax.swing.JFrame {
                     .addComponent(btConnect)
                     .addComponent(lbStatus)
                     .addComponent(btClear)
-                    .addComponent(jButton1))
+                    .addComponent(btDisconnect))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -230,9 +239,13 @@ public class ChitchatClient extends javax.swing.JFrame {
         model.setRowCount(0);
     }//GEN-LAST:event_btClearActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btDisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDisconnectActionPerformed
         waitMessage.interrupt();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btDisconnectActionPerformed
+
+    private void tfPortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPortActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfPortActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,8 +285,8 @@ public class ChitchatClient extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btClear;
     private javax.swing.JButton btConnect;
+    private javax.swing.JButton btDisconnect;
     private javax.swing.JButton btSend;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -306,7 +319,6 @@ public class ChitchatClient extends javax.swing.JFrame {
                     //step 7 extract message (แปลง byte เป็น String)
                     msgIn = new String(dpIn.getData(), 0, dpIn.getLength());
                     System.out.println(msgIn);
-
 
                     //shot TB
                     model.addRow(new Object[]{msgIn});
