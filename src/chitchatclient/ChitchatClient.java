@@ -33,6 +33,22 @@ public class ChitchatClient extends javax.swing.JFrame {
 
             waitMessage.start();
 
+//--------------------------------------------------------
+            String ip = tfIp.getText().toString();
+            int port = Integer.parseInt(tfPort.getText());
+            try {
+                //step 2 prepair packet for server
+                msgOut = "login";
+                dpOut = new DatagramPacket(msgOut.getBytes(), msgOut.length(), InetAddress.getByName(ip), port);
+
+                //step 3 send packet
+                ds.send(dpOut);
+
+            } catch (IOException ioe) {
+                System.out.println("IO error : " + ioe);
+            }
+//--------------------------------------------------------
+
             lbStatus.setText("Running");
 
         } catch (SocketException se) {
@@ -46,6 +62,22 @@ public class ChitchatClient extends javax.swing.JFrame {
 
     }
 
+    public void disconnect() {
+        String ip = tfIp.getText().toString();
+        int port = Integer.parseInt(tfPort.getText());
+        try {
+            //step 2 prepair packet for server
+            msgOut = "logout";
+            dpOut = new DatagramPacket(msgOut.getBytes(), msgOut.length(), InetAddress.getByName(ip), port);
+
+            //step 3 send packet
+            ds.send(dpOut);
+
+        } catch (IOException ioe) {
+            System.out.println("IO error : " + ioe);
+        }
+    }
+
     public void sendMessage() {
 
         String ip = tfIp.getText().toString();
@@ -53,7 +85,7 @@ public class ChitchatClient extends javax.swing.JFrame {
 
         try {
             //step 2 prepair packet for server
-            msgOut = tfName.getText().toString()+" : "+tfMessage.getText().toString();
+            msgOut = tfName.getText().toString() + " : " + tfMessage.getText().toString();
             dpOut = new DatagramPacket(msgOut.getBytes(), msgOut.length(), InetAddress.getByName(ip), port);
 
             //step 3 send packet
@@ -213,9 +245,9 @@ public class ChitchatClient extends javax.swing.JFrame {
                     .addComponent(btClear)
                     .addComponent(btDisconnect))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane2)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tfMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -240,7 +272,9 @@ public class ChitchatClient extends javax.swing.JFrame {
     }//GEN-LAST:event_btClearActionPerformed
 
     private void btDisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDisconnectActionPerformed
+        disconnect();
         waitMessage.interrupt();
+        
     }//GEN-LAST:event_btDisconnectActionPerformed
 
     private void tfPortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPortActionPerformed
