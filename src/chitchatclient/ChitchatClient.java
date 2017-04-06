@@ -24,6 +24,18 @@ public class ChitchatClient extends javax.swing.JFrame {
         model = (DefaultTableModel) tbMessage.getModel();
 
         waitMessage = new WaitMessage();
+
+        btDisconnect.setEnabled(false);
+
+        btClear.setEnabled(false);
+
+        //table
+        tbMessage.setEnabled(false);
+
+        //chat box
+        tfMessage.setEnabled(false);
+        btSend.setEnabled(false);
+
     }
 
     public void connect() {
@@ -261,6 +273,25 @@ public class ChitchatClient extends javax.swing.JFrame {
 
     private void btConnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btConnectActionPerformed
         connect();
+
+        btConnect.setEnabled(false);
+
+        //textfield
+        tfIp.setEnabled(false);
+        tfPort.setEnabled(false);
+        tfName.setEnabled(false);
+
+        btDisconnect.setEnabled(true);
+
+        btClear.setEnabled(true);
+
+        //table
+        tbMessage.setEnabled(true);
+
+        //chat box
+        tfMessage.setEnabled(true);
+        btSend.setEnabled(true);
+
     }//GEN-LAST:event_btConnectActionPerformed
 
     private void btSendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btSendActionPerformed
@@ -275,6 +306,22 @@ public class ChitchatClient extends javax.swing.JFrame {
         disconnect();
         waitMessage.interrupt();
         
+        //textfield
+        tfIp.setEnabled(true);
+        tfPort.setEnabled(true);
+        tfName.setEnabled(true);
+
+        btDisconnect.setEnabled(false);
+
+        btClear.setEnabled(false);
+
+        //table
+        tbMessage.setEnabled(false);
+
+        //chat box
+        tfMessage.setEnabled(false);
+        btSend.setEnabled(false);
+
     }//GEN-LAST:event_btDisconnectActionPerformed
 
     private void tfPortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPortActionPerformed
