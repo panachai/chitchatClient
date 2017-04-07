@@ -1,5 +1,6 @@
 package chitchatclient;
 
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -103,6 +104,8 @@ public class ChitchatClient extends javax.swing.JFrame {
             //step 3 send packet
             ds.send(dpOut);
 
+            tfName.setText("");
+
         } catch (IOException ioe) {
             System.out.println("IO error : " + ioe);
         }
@@ -172,6 +175,12 @@ public class ChitchatClient extends javax.swing.JFrame {
         jScrollPane2.setViewportView(luser);
 
         lbStatus.setText("Status");
+
+        tfMessage.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfMessageKeyPressed(evt);
+            }
+        });
 
         btSend.setText("Send");
         btSend.addActionListener(new java.awt.event.ActionListener() {
@@ -305,7 +314,7 @@ public class ChitchatClient extends javax.swing.JFrame {
     private void btDisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btDisconnectActionPerformed
         disconnect();
         waitMessage.interrupt();
-        
+
         //textfield
         tfIp.setEnabled(true);
         tfPort.setEnabled(true);
@@ -327,6 +336,14 @@ public class ChitchatClient extends javax.swing.JFrame {
     private void tfPortActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfPortActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfPortActionPerformed
+
+    private void tfMessageKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfMessageKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            System.out.println("1");
+        }
+//ทำต่อด้วย
+
+    }//GEN-LAST:event_tfMessageKeyPressed
 
     /**
      * @param args the command line arguments
