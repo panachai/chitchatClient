@@ -330,6 +330,8 @@ public class ChitchatClient extends javax.swing.JFrame {
         //chat box
         tfMessage.setEnabled(false);
         btSend.setEnabled(false);
+        
+        System.out.println("Disconnect client complete");
 
     }//GEN-LAST:event_btDisconnectActionPerformed
 
